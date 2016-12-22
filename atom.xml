@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>晓风凌殇的Blog&#39;s</title>
   
   <link href="/atom.xml" rel="self"/>
   
@@ -9,8 +9,8 @@
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>John Doe</name>
-    
+    <name>ZF</name>
+    <email>zhangfei95612@foxmail.com</email>
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>

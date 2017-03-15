@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://zf123.win">
+  <title>I2C模拟总结 | 晓风凌殇的Blog&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#纯IO模拟I2C从机设备硬件平台：义隆仿真–em78p173n
+一般IO模拟有2种方法：中断或查询。这里用的是查询的方式。查询IO口状态变化，主机SCK速率不能超过30K。SDA 设置IO控制寄存器为输入模式
+
+I2C协议中最重要的一点是I2C地址。这个地址有7位和10位两种形式。7位能够表示127个地址，而在实际使用中基本上不会挂载如此多的设置，所以很多设备的地址都采用7位，所以本文接下来的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="I2C模拟总结">
+<meta property="og:url" content="http://zf123.win/2017/03/15/I2C模拟总结/index.html">
+<meta property="og:site_name" content="晓风凌殇的Blog's">
+<meta property="og:description" content="#纯IO模拟I2C从机设备硬件平台：义隆仿真–em78p173n
+一般IO模拟有2种方法：中断或查询。这里用的是查询的方式。查询IO口状态变化，主机SCK速率不能超过30K。SDA 设置IO控制寄存器为输入模式
+
+I2C协议中最重要的一点是I2C地址。这个地址有7位和10位两种形式。7位能够表示127个地址，而在实际使用中基本上不会挂载如此多的设置，所以很多设备的地址都采用7位，所以本文接下来的">
+<meta property="og:image" content="http://zf123.win/2017/03/15/I2C模拟总结/images/I2C-1.jpg">
+<meta property="og:updated_time" content="2017-03-15T10:32:50.711Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="I2C模拟总结">
+<meta name="twitter:description" content="#纯IO模拟I2C从机设备硬件平台：义隆仿真–em78p173n
+一般IO模拟有2种方法：中断或查询。这里用的是查询的方式。查询IO口状态变化，主机SCK速率不能超过30K。SDA 设置IO控制寄存器为输入模式
+
+I2C协议中最重要的一点是I2C地址。这个地址有7位和10位两种形式。7位能够表示127个地址，而在实际使用中基本上不会挂载如此多的设置，所以很多设备的地址都采用7位，所以本文接下来的">
+<meta name="twitter:image" content="http://zf123.win/2017/03/15/I2C模拟总结/images/I2C-1.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="晓风凌殇的Blog&#39;s" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css?v=4.0.0.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://avatars2.githubusercontent.com/u/20395247?v=3&amp;s=460" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ZF</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/about">关于</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a data-idx="0" q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a data-idx="1" q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a data-idx="2" q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/zhangfei95612" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/2645757633/profile?topnav=1&wvr=6&is_all=1" title="weibo"><i class="icon-weibo"></i></a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhangfei95612/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">ZF</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars2.githubusercontent.com/u/20395247?v=3&amp;s=460" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ZF</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        
+		        	<li><a href="/archives/">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/zhangfei95612" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2645757633/profile?topnav=1&wvr=6&is_all=1" title="weibo"><i class="icon-weibo"></i></a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhangfei95612/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-I2C模拟总结" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      I2C模拟总结
+    </h1>
+  
+
+        <a href="/2017/03/15/I2C模拟总结/" class="archive-article-date">
+  	<time datetime="2017-03-15T01:22:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-15</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> #纯IO模拟I2C从机设备<br>硬件平台：义隆仿真–em78p173n</p>
+<pre><code>一般IO模拟有2种方法：中断或查询。这里用的是查询的方式。查询IO口状态变化，主机SCK速率不能超过30K。SDA 设置IO控制寄存器为输入模式
+
+I2C协议中最重要的一点是I2C地址。这个地址有7位和10位两种形式。7位能够表示127个地址，而在实际使用中基本上不会挂载如此多的设置，所以很多设备的地址都采用7位，所以本文接下来的说明都是基于此。I2C还有一个很重要的概念，就是“主—从”。对于从设备来说，它是啥都不干的，更不会自动发送数据；而主设备，则是起到控制作用，一切都是从它开始。
+</code></pre><a id="more"></a>
+<p>先看I2C协议<br> 接口结构 ：  加上拉电阻到正电源。连接到总线的器件其输出级必须是低有效的开漏或开集电极结构以实现“线与”功能，连接到总线上可被寻址的器件必须具有唯一地址。</p>
+<p>总线空闲：    保持高电平</p>
+<p>起始条件：    当SCL为高电平时，SDA的一个下降沿定义为启始条件（S）。所有信息传输必须以启始条件开始。所有接收到启始条件的器件必须复位它们的总线逻辑。<br>停止条件：<br>当SCL为高电平时，SDA的一个上升沿定义为停止条件（P）。所有信息传输必须以停止条件结束。所有接收到停止条件的器件必须复位它们的总线逻辑和接口状态，主器件在产生停止条件后将释放总线。</p>
+<p>主器件 ：        产生启始条件和串行时钟信号的器件称为主器件（或主机）。启始条件、重复启始条件、停止条件、串行时钟信号只能由主机产生。 </p>
+<p>寻址 ：         主机使用地址查找目标器件的过程。  </p>
+<p>从器件：       被主机寻址的器件称为从器件（或从机）。主机可寻址一个或多个从机，被寻址的从机可参与或不参与数据传输。</p>
+<p> 字节格式：    发送到SDA线上的每个字节必须为8位，每个字节的最高位（MSB）先发送。每次传输可以发送的字节数量不受限制。</p>
+<p>控制码  ：       由主机发送，用于寻址、配置或控制从机的信息称为控制码。根据总线模式的不同，控制码可有一个或多个“控制字节”。控制字节可按属性命名，如主机码、从机码、方向码，或者按字节次序分别命名，如第n个字节的控制码称为“第n控制码”。包含数据方向位的控制字节称为“方向码”，协议规定方向码的最低位（LSB）为数据方向位（R/W）。数据方向位的值取决于主机是发送还是接收数据。若是发送，则该位为W，表示向总线写数据，其值为0；若是接收，则该位为R，表示从总线读数据，其值为1。</p>
+<p>应答信号 ：   发送到SDA线上的每个字节后面必须跟一个应答信号(1)。<br>应答信号总是由接收当前字节的器件产生。一个应答信号占用一个时钟脉冲，在应答时钟脉冲高电平期间，发送字节的器件必须释放SDA线，而接收当前字节的器件应保持SDA线为稳定的电平——低电平表示“正态应答ACK”，高电平表示“反态应答NACK”</p>
+<p>位传输：  每传输一位信息就产生一个时钟脉冲。SDA只能在时钟低电平期间改变状态，在时钟高电平期间必须保持稳定。每个时钟脉冲包含两个边沿，下降沿在前，上升沿在后。在位传输过程中，接口总是在时钟脉冲的下降沿写入SDA，而在时钟脉冲的上升沿读取SDA。I2C总线事件（如地址识别、中断产生）总是发生在时钟脉冲的下降沿。<br> 数据有效性：<br>          I2C总线进行数据传送时，时钟信号为高电平期间，数据线上的数据必须保持稳定，只有在时钟线上的信号为低电平期间，数据线上的高电平或低电平状态才允许变化。<br>          <img src="/2017/03/15/I2C模拟总结/images/I2C-1.jpg" alt="logo"></p>
+<pre><code>SCL是时钟，SDA承载的是数据。当SDA从1变动到0，而SCL还是1时，表示开始数据传输。接下来的7位，就是设备的地址。紧接着的是读写标志，其为1时是读取，为0则是写。如果I2C总线上存在着和请求的地址相对应的设备，则从设备会发送一个ACK信号通知主设备，可以发送数据了。接到ACK信号后，主设备则发送一个8位的数据。当传输完毕之后，SCL保持为1，SDA从0变换到1时，标明传输结束。
+</code></pre><p>观看时序图总结一下几点：</p>
+<ol>
+<li>时序图都是共用一个时钟信号，注意时钟信号在上下图中的对应。</li>
+<li>时序图中有叉或者上升下降的如果是数据线的话表示数据有变化。菱形封闭的一段表示有效数据。</li>
+<li><p>数据需要一段时间稳定，一般在数据变化后，时钟的上升沿或者下降沿读入数据或者写入数据。</p>
+<pre><code>![logo](source/images/I2C-2.jpg)
+</code></pre></li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/嵌入式/">嵌入式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://zf123.win/2017/03/15/I2C模拟总结/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/11/08/如何高效的学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何高效的学习</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="I2C模拟总结" data-title="I2C模拟总结" data-url="http://zf123.win/2017/03/15/I2C模拟总结/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 ZF
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js?v=4.0.0.js"></script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">嵌入式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">技术</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">学习</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="http://litten.me/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://github.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">I&#39;m trying to be a better man</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

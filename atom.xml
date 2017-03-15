@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zf123.win/"/>
-  <updated>2017-03-15T10:31:53.246Z</updated>
+  <updated>2017-03-15T10:32:50.711Z</updated>
   <id>http://zf123.win/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://zf123.win/2017/03/15/I2C%E6%A8%A1%E6%8B%9F%E6%80%BB%E7%BB%93/"/>
     <id>http://zf123.win/2017/03/15/I2C模拟总结/</id>
     <published>2017-03-15T01:22:25.000Z</published>
-    <updated>2017-03-15T10:31:53.246Z</updated>
+    <updated>2017-03-15T10:32:50.711Z</updated>
     
     <content type="html"><![CDATA[<p> #纯IO模拟I2C从机设备<br>硬件平台：义隆仿真–em78p173n</p>
 <pre><code>一般IO模拟有2种方法：中断或查询。这里用的是查询的方式。查询IO口状态变化，主机SCK速率不能超过30K。SDA 设置IO控制寄存器为输入模式

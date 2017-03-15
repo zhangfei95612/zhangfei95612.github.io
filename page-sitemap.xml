@@ -7,6 +7,13 @@
     </url>
     
     <url>
+        <loc>http://zf123.win/music/</loc>
+        <lastmod>2017-03-15T11:34:48.520Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>http://zf123.win/about/</loc>
         <lastmod>2017-03-15T09:04:06.267Z</lastmod>
         <changefreq>weekly</changefreq>

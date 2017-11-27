@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://zf123.win">
+  <title>学习嵌入式 | 晓风凌殇的Blog&#39;s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、万事开头难、要勇敢迈出第一步。开始的时候，不要老是给自己找借口，说KEIL不会建项目啦、没有实验板啦之类的。遇到困难要一件件攻克，不会建项目，就先学它，这方面网上教程很多，随便找找看一下，做几次就懂了。然后可以参考别的人程序，抄过来也无所谓，写一个最简单的，让它运行起来，先培养一下自己的感觉，知道写程序是怎么一回事，无论写大程序还是小程序，要做的工序不会差多少，总得建个项目，再配置一下项目，然">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习嵌入式">
+<meta property="og:url" content="http://zf123.win/2017/11/27/零基础学习嵌入式/index.html">
+<meta property="og:site_name" content="晓风凌殇的Blog's">
+<meta property="og:description" content="1、万事开头难、要勇敢迈出第一步。开始的时候，不要老是给自己找借口，说KEIL不会建项目啦、没有实验板啦之类的。遇到困难要一件件攻克，不会建项目，就先学它，这方面网上教程很多，随便找找看一下，做几次就懂了。然后可以参考别的人程序，抄过来也无所谓，写一个最简单的，让它运行起来，先培养一下自己的感觉，知道写程序是怎么一回事，无论写大程序还是小程序，要做的工序不会差多少，总得建个项目，再配置一下项目，然">
+<meta property="og:updated_time" content="2017-11-27T13:25:15.621Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习嵌入式">
+<meta name="twitter:description" content="1、万事开头难、要勇敢迈出第一步。开始的时候，不要老是给自己找借口，说KEIL不会建项目啦、没有实验板啦之类的。遇到困难要一件件攻克，不会建项目，就先学它，这方面网上教程很多，随便找找看一下，做几次就懂了。然后可以参考别的人程序，抄过来也无所谓，写一个最简单的，让它运行起来，先培养一下自己的感觉，知道写程序是怎么一回事，无论写大程序还是小程序，要做的工序不会差多少，总得建个项目，再配置一下项目，然">
+  
+    <link rel="alternative" href="/atom.xml" title="晓风凌殇的Blog&#39;s" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css?v=4.0.0.css">
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="https://avatars2.githubusercontent.com/u/20395247?v=3&amp;s=460" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">ZF</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/about">关于</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a data-idx="0" q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a data-idx="1" q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a data-idx="2" q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/zhangfei95612" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/2645757633/profile?topnav=1&wvr=6&is_all=1" title="weibo"><i class="icon-weibo"></i></a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhangfei95612/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+			</div>
+		</nav>
+
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">ZF</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="https://avatars2.githubusercontent.com/u/20395247?v=3&amp;s=460" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">ZF</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        
+		        	<li><a href="/archives/">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/zhangfei95612" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/2645757633/profile?topnav=1&wvr=6&is_all=1" title="weibo"><i class="icon-weibo"></i></a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhangfei95612/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-零基础学习嵌入式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      学习嵌入式
+    </h1>
+  
+
+        <a href="/2017/11/27/零基础学习嵌入式/" class="archive-article-date">
+  	<time datetime="2017-11-27T13:23:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-27</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、万事开头难、要勇敢迈出第一步。<br>开始的时候，不要老是给自己找借口，说KEIL不会建项目啦、没有实验板啦之类的。遇到困难要一件件攻克，不会建项目，就先学它，这方面网上教程很多，随便找找看一下，做几次就懂了。然后可以参考别的人程序，抄过来也无所谓，写一个最简单的，让它运行起来，先培养一下自己的感觉，知道写程序是怎么一回事，无论写大程序还是小程序，要做的工序不会差多少，总得建个项目，再配置一下项目，然后建个程序，加入项目中，再写代码、编译、生成HEX，刷进单片机中、运行。必须熟悉这一套工序。个人认为，一块学习板还是必要的，写好程序在上面运行一下看结果，学习效果会好很多，仿真器就看个人需要了。单片机是注重理论和实践的，光看书不动手，是学不会的。</p>
+<p>2、知识点用到才学，不用的暂时丢一边。</p>
+<p>厚厚的一本书，看着人头都晕了，学了后面的，前面的估计也快忘光了，所以，最好结合实际程序，用到的时候才去看，不必说非要把书从第一页看起，看完它才来写程序。比如你写流水灯，完全就没必要看中断的知识，专心把流水灯学好就是了，这是把整本书化整为零，一小点一小点的啃。</p>
+<p>3、程序不要光看不写，一定要自己写一次。</p>
+<p>最开始的时候，啥都不懂，可以抄人家的程序过来，看看每一句是干什么用的，达到什么目的，运行后有什么后果，看明白了之后，就要自己写一次，你会发现，原来看明白别人的程序很容易，但到自己写的时候却一句也写不出来，这就是差距。。。当你自己能写出来的时候，说明你就真的懂了。。。<br><a id="more"></a></p>
+<p>4、必须学会掌握调试程序的方法。</p>
+<p>不少人写程序，把代码写好了，然后一运行，不是自己想要的结果，就晕了，然后跑到论坛上发个帖子，把程序一贴，问：为什么我的程序不能正常运行?然后就等别人来给自己分析。这是一种很不好的行为，应该自己学会发现问题和学会如何解决问题。这就需要学习调试程序的方法，比如KEIL里，可以下断点啦，查看寄存器内容等等，这些都是调试程序的手段，当你发现你写的程序运行结果和你想象中不一样的时候，你可以单步，也可以下断点，然后跟踪，查看各相关寄存器内容，看看程序运行过中是不是有什么偏差，找出影响结果的地方，改正过来。这一个过程非常重要，通过程序的排错，你可以学到的知识是书上得不到的。</p>
+<p>5、找到解决问题思路比找到代码更重要。</p>
+<p>我们用单片机来控制周边器件，达到我们想到的目的，这是一个题目，而如何写出一个程序，来控制器件按你想要的结果去运作，这个就是解题的思路。要写程序，就得先找到解决问题的思路，你学会找出这个解题思路，比你找到代码更为重要。不少人很喜欢找人家的代码，有的人甚至有了代码就直接复制到自己的程序中，可以说，这不是一种学习的态度，无助于你编程水平的提高。我几乎不怎么看人家的代码，多数时候是看别人的思路，有方框图最好，没有的话文字说明也可以，要从代码中看出别人处理问题的思路，是相当困难的，特别是大型的程序，看起来是非常的累人，所以现在我也明白了，以前读书时说的程序流程图很重要，现在算是知道了。当你知道一个问题怎么去解决了，那么剩下的只是你安排代码去完成，这就已经不是什么问题了。举个例子：数码管动态扫描，没写过的初学者可能搞不清是怎么回事，其实，就是分时让每一时间段时只控制一只数码管显示数字，几只数码管轮流显示，由于速度很快，人眼的看起来是全部数码管都亮的。明白是这么一回事，事情就好办了，剩下的事情，无非是你安排让一只只数码管轮流显示出相应的数值。显示数字，然后延时一下，再下一只显示数字，延时，知道是这样，我们实际程序上只要做到这样就可以：往段口送段码，然后打开位选显示一只，延时一下，再关闭位选，再送出段码，再打开另一只位选..仅此而已。有了解决问题的思路，我们就能问题拆分开来，然后逐一的解决，如果动态扫描的原理都没懂，不知道如何做，那么这个程序是怎么也写不出来的。</p>
+<p>6、开动脑筋，运用多种方法，不断优化自己的程序。</p>
+<p>想想用各种不同方法来实现同一功能。这是一个练习和提高的过程，一个问题，你解决了，那么你再想想，能不能换种写法，也可以实现同一功能，或者说，你写出来的代码，能不能再精简一点，让程序执行效率更高，这个过程，就是一个进步的过程。很多知识和经验的获得，并不是直接写在书让你看就可以得到的，需要自己去实践，开动脑筋，经验才能得到积累，编程水平才能有所提高。</p>
+<p>7、看别人的代码，学习人家的思路。</p>
+<p>这个在学习初期是很有用，通过看别人的代码，特别是有多年编程经验的人写出的具有一定水平的代码，可以使自己编程水平得到迅速的提高，同时，也可以结合别人的编程手法，与自己的想法融合在一起，写出更高水平的代码，从中得到进步。但要注意，切忌将学习变成抄袭，更不是抄袭完了就认为自己学会了，这样做只会使你退步。</p>
+<p>8、尝试编写一下综合应用的程序。</p>
+<p>从流水灯学起，到动态扫描，再到中断，那么，你可以试试写一下时钟这种综合性应用的程序，不要小看时钟，要写好它不是一件容易的事情，它包括了单片机大部分的知识，比如有按键(IO读取)、动态扫描(IO输出)、中断等，如何协调好各功能模块正常工作，才是编程者需要学习的地方，当你单独写一个功能的时候，比如按键读取，你可能感觉很容易，因为你的程序啥也不做，只是读按键。但把它和其它功能混合在一起，如何在整个程序运行中使每一部分都正常工作，这就不是写一个按键读取这么容易的事情，功能模块之间有可能会互相影响，比如你需要让数码管既能显示，又要去处理按键读取，怎么使这两部分都正常工作，这就是一个协调过程。当你有了这个处理协调能力，你就算是入门了。</p>
+<p>9、着重于培养解决问题的能力，而不是具体看自己编写了多少代码或者做过什么。</p>
+<p>“学单片机重点在于学习解决问题的思路，而不是局限于具体的芯片类型和语言”这一直是我的座右铭，是我学单片机多年来感悟出来的。经常看到有人说“你会驱动XX芯片，真牛啊”“你搞过XX项目，真厉害”之类的话，其实这是非常片面的，搞过XX芯片，搞过XX项目，只能说明你做过这一项目，它只是你的业绩，并不是代表能力就一定高。真正的能力应该是：“遇到没有解决过的问题或器件，能利用自己已学的知识，迅速找到解决问题的方法。”这个才是能力。写程序的过程就是一个创造的过程，几乎没有完全一样的项目，每次你遇上的几乎都不相同，所以你拥有的必须是你面对新项目时的创造能力，而不是标榜着你以往做过多少项目。当然，业绩也能从另一侧面反映你的经验和水平。</p>
+<p>10、如果有可能，多学习计算机专业的知识，比如数据结构等。</p>
+<p>这些是你解决问题的基础知识，你把这些知识应用得越好，就会发现越容易找到解决问题的方法，这就是为什么一个学计算机专业的人编的程序和一个非计算机专业的人编的程序有差异的原因。也是一个菜鸟进军到高手所要配备的知识。如果我们把编程分为宏观编程和微观编程，那么微观编程就是写具体的代码，比如控制某某器件的语句;而宏观编程就是如何对整个程序进行布局、安排，使功能模块以你想要的方式去运行，得出你想要的结果。如前所说“会控制XX器件”这些只能算是微观编程，能做到这一步还只能算是菜鸟级别，如果面对一个新的器件，你心里没底，没把握去写这个控制程序，那说明你还是一个初级的菜鸟。当你有了一定的编程经验，控制过相当数量的器件之后，你就会发现，控制器件这些工作都是相似的、重复的工作，体现不出编程的水平，最多也是写得好与不好的差别，只能算是一些小技巧的应用。而对整个程序进行布局、安排这些才是最头痛的事情，能达到宏观编程和微观编程都做好才是真正的高手。对于规模越大的程序，越能体现出这一点。</p>
+<p>11、面对一个新项目时，多自己开动脑筋，不要急于找别人的程序。</p>
+<p>有不少人面对一个新项目时，第一步想到的就是网上找别人写过的代码，然后抄一段，自己再写几句，凑在一起就完成任务，这虽然可能是省时间，但绝对不利你的学习。当你接到一个新项目时，应该先自己构思一下整个程序的架构，想想如何来完成，有可能的话，画一个流程图，简单的可以画在脑子里，对程序中用到的数据、变量有一个初步的安排，然后自己动手去写，遇到实在没办法解决的地方，再去请教别人，或看别人是怎么处理的，这样首先起码你自己动过脑想过，自己有自己的思路，如果你一开始就看别人的程序，你的思维就会受限在别人的思维里，自己想再创新就更难了，这样你自己永远也没办法提高，因为你是走在别人的影子里。<br>有不少人面对一个新项目时，第一步想到的就是网上找别人写过的代码，然后抄一段，自己再写几句，凑在一起就完成任务，这虽然可能是省时间，但绝对不利你的学习。当你接到一个新项目时，应该先自己构思一下整个程序的架构，想想如何来完成，有可能的话，画一个流程图，简单的可以画在脑子里，对程序中用到的数据、变量有一个初步的安排，然后自己动手去写，遇到实在没办法解决的地方，再去请教别人，或看别人是怎么处理的，这样首先起码你自己动过脑想过，自己有自己的思路，如果你一开始就看别人的程序，你的思维就会受限在别人的思维里，自己想再创新就更难了，这样你自己永远也没办法提高，因为你是走在别人的影子里。</p>
+<p>12、多利用网络的搜索，学会提问题。</p>
+<p>一般来说，学习过程中，你遇上的问题，前人们多数也有遇上的，所以如果有什么不懂，在自己解决不了的时候，最好先到网上搜索一下，看能不能找到答案，找不到再到论坛里发问，发问也要有目的性，尽量简单明了的描述问题，让帮助你的人可以用最少的时间就看懂你说什么，毕竟人家帮助你是免费的，时间也是有限的。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/嵌入式/">嵌入式</a></li></ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://zf123.win/2017/11/27/零基础学习嵌入式/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/15/I2C模拟总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">I2C模拟总结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="零基础学习嵌入式" data-title="学习嵌入式" data-url="http://zf123.win/2017/11/27/零基础学习嵌入式/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 ZF
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js?v=4.0.0.js"></script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">嵌入式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">技术</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="http://litten.me/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://github.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">I&#39;m trying to be a better man</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
